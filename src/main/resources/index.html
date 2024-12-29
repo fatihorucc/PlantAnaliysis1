@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitki Verimliliği Analiz Sistemi</title>
+    <link rel="stylesheet" href="styles.css"> <!-- CSS dosyasını dahil et -->
+</head>
+<body>
+<header>
+    <h1>Bitki Verimliliği Analiz Sistemi</h1>
+</header>
+<main>
+    <!-- Form kısmı -->
+    <form id="analysis-form">
+        <label for="region">Bölge Seçimi:</label>
+        <input type="text" id="region" name="region" required placeholder="Bölge adı">
+
+        <label for="start-date">Başlangıç Tarihi:</label>
+        <input type="date" id="start-date" name="start-date" required>
+
+        <label for="end-date">Bitiş Tarihi:</label>
+        <input type="date" id="end-date" name="end-date" required>
+
+        <label for="plant-type">Bitki Türü:</label>
+        <input type="text" id="plant-type" name="plant-type" required placeholder="Bitki türü">
+
+        <button type="submit">Analiz Et</button>
+    </form>
+
+    <!-- Sonuçlar kısmı -->
+    <section id="results">
+        <h2>Analiz Sonuçları</h2>
+        <div id="chart-container">
+            <!-- Grafikler burada dinamik olarak yüklenecek -->
+        </div>
+        <button id="download-results">Sonuçları İndir</button>
+    </section>
+</main>
+
+<script src="scripts.js"></script> <!-- JavaScript dosyasını dahil et -->
+<script>
+    fetch('http://localhost:8080/api/data')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Gelen veri:", data);
+            document.body.innerHTML = `<h1>${data.message}</h1>`;
+        })
+        .catch(error => console.error('Hata:', error));
+</script>
+
+</body>
+</html>
